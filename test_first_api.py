@@ -1,5 +1,6 @@
 
-class FirstTestAPI:
+class TestFirstTestAPI:
+
     def test_insert_short_text(self):
         phrase = input("Set a phrase: ")
         length = len(phrase)
