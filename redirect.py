@@ -8,3 +8,4 @@ number_of_redirects = len(history)
 print(number_of_redirects)
 
 print(history[number_of_redirects-1].url)
+

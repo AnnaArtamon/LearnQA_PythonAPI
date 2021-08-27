@@ -17,7 +17,7 @@ class TestUserAgent:
         response = requests.get('https://playground.learnqa.ru/ajax/api/user_agent_check', headers=headers)
         response_json = json.loads(response.text)
 
-        actual_platform = response_json['platform']
+        actual_platform = response.json()["platform"] #try to remember
         actual_browser = response_json['browser']
         actual_device = response_json['device']
 
