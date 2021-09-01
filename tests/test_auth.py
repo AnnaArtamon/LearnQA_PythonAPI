@@ -20,7 +20,7 @@ class TestAuth(BaseCase):
                                  headers={"x-csrf-token": self.header_token},
                                  cookies={"auth_sid": self.cookie_auth_sid})
 
-        Assertions.assert_json_value_by_name(response2, "user_id", self.user_id_auth,
+        Assertions.assert_json_value_by_key(response2, "user_id", self.user_id_auth,
                                              "User_id from check method is not equal to user_id form auth method")
 
     @pytest.mark.parametrize('condition', exclude_params)
@@ -33,5 +33,5 @@ class TestAuth(BaseCase):
             response2 = requests.get("https://playground.learnqa.ru/api/user/auth",
                                      cookies={"auth_sid": self.cookie_auth_sid})
 
-        Assertions.assert_json_value_by_name(response2, "user_id", 0,
+        Assertions.assert_json_value_by_key(response2, "user_id", 0,
                                              f"User is authorized with condition {condition}")
