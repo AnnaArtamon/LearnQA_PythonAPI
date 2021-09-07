@@ -29,7 +29,6 @@ class TestUserEdit(BaseCase):
         self.auth_sid = self.get_cookie(response2, "auth_sid")
         self.token = self.get_header(response2, "x-csrf-token")
 
-        sleep(1)
 
     @allure.description("Positive test of editing user's info")
     def test_edit_just_created_user(self):

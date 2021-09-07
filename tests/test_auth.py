@@ -17,6 +17,7 @@ class TestAuth(BaseCase):
         self.header_token = self.get_header(response, "x-csrf-token")
         self.user_id_auth = self.get_json_value(response, "user_id")
 
+    @allure.severity("blocker")
     @allure.description("This test successfully authorizes user by email and password")
     def test_auth(self):
         response2 = MyRequests.get("/user/auth",
@@ -26,6 +27,7 @@ class TestAuth(BaseCase):
         Assertions.assert_json_value_by_key(response2, "user_id", self.user_id_auth,
                                              "User_id from check method is not equal to user_id form auth method")
 
+    @allure.severity("blocker")
     @allure.description("This test checks authorization status w/o sending auth cookie of token")
     @pytest.mark.parametrize('condition', exclude_params)
     def test_negative_auth(self, condition):

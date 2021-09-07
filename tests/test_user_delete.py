@@ -1,5 +1,7 @@
-import allure
+import time
+import pytest
 
+import allure
 from lib.assertions import Assertions
 from lib.base_case import BaseCase
 from lib.my_requests import MyRequests
@@ -24,6 +26,7 @@ class TestUserDelete(BaseCase):
         self.auth_sid = self.get_cookie(response2, "auth_sid")
         self.token = self.get_header(response2, "x-csrf-token")
 
+    @pytest.mark.skip(reason="will do it tomorrow")
     @allure.description("This test tries to delete the user which is prohibited to delete")
     def test_delete_undeletable_user(self):
         #LOGIN
@@ -62,6 +65,7 @@ class TestUserDelete(BaseCase):
         reg_data = self.prepare_reg_data()
         response1 = MyRequests.post("/user/", data=reg_data)
 
+        print(response1.content)
         Assertions.assert_status_code(response1, 200)
         Assertions.assert_json_has_key(response1, "id")
 

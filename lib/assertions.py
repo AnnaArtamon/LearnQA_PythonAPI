@@ -1,3 +1,4 @@
+import allure
 from requests import Response
 import json
 
@@ -9,8 +10,11 @@ class Assertions:
             response_as_dict = response.json()
         except json.decoder.JSONDecodeError:
             assert False, f"Response is not in JSON format. The response text is '{response.text}'"
+
         assert key in response_as_dict, f"There's no key '{key}' in the response"
-        assert response_as_dict[key] == expected_value, error_message
+        with allure.step(f"Checking value of the key {key}"):
+            allure.attach("Response body", json.dumps(response_as_dict))
+            assert response_as_dict[key] == expected_value, error_message
 
     @staticmethod
     def assert_status_code(response: Response, expected_status_code):
